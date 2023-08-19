@@ -45,7 +45,7 @@ export async function addToWishList(userId: string, data: any) {
     "allWishListItems",
     // deno-lint-ignore no-explicit-any
   ]) as any;
-  await kv.set([userId, "addToWishList"], [
+  await kv.set([userId, "allWishListItems"], [
     ...allWishListItems.value,
     data,
   ]);
