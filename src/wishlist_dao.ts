@@ -33,11 +33,25 @@ export class WishlistDao {
     ]);
   }
 
-  async getAllWishLists(userId: string) {
-    await this.ingestMockData("1");
+  // deno-lint-ignore no-explicit-any
+  async getAllWishLists(userId: string): Promise<any> {
+    // await this.ingestMockData("1");
     const allWishListItems = await this.kv.get([userId, "allWishListItems"]);
     console.log(allWishListItems);
 
     return allWishListItems.value;
+  }
+
+  // deno-lint-ignore no-explicit-any
+  async addToWishList(userId: string, data: any) {
+    const allWishListItems = await this.kv.get([
+      userId,
+      "allWishListItems",
+      // deno-lint-ignore no-explicit-any
+    ]) as any;
+    await this.kv.set([userId, "addToWishList"], [
+      ...allWishListItems.value,
+      data,
+    ]);
   }
 }

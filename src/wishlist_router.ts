@@ -24,10 +24,11 @@ router.get("/:userId", async (ctx) => {
 //   const result = await getQueueItemAt(ctx.params.queue, ctx.params.id);
 //   ctx.response.body = result;
 // });
-// router.post("/:queue", async (ctx) => {
-//   const body = await ctx.request.body().value;
-//   const result = await addToQueue(ctx.params.queue, body);
-//   ctx.response.body = result;
-// });
+
+router.post("/:userId", async (ctx) => {
+  const body = await ctx.request.body().value;
+  await wishlistDao.addToWishList(ctx.params.userId, body);
+  ctx.response.body = body;
+});
 
 export { router as default };
