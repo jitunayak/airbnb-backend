@@ -45,10 +45,17 @@ export async function addToWishList(userId: string, data: any) {
     "allWishListItems",
     // deno-lint-ignore no-explicit-any
   ]) as any;
-  await kv.set([userId, "allWishListItems"], [
-    ...allWishListItems.value,
-    data,
-  ]);
+
+  if (allWishListItems.value) {
+    await kv.set([userId, "allWishListItems"], [
+      ...allWishListItems.value,
+      data,
+    ]);
+  } else {
+    await kv.set([userId, "allWishListItems"], [
+      data,
+    ]);
+  }
 }
 
 export async function removeFromWishList(userId: string, itemId: string) {
