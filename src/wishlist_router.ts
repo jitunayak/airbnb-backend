@@ -2,16 +2,14 @@ import { Router } from "https://deno.land/x/oak@v12.5.0/router.ts";
 
 import { WishlistDao } from "./wishlist_dao.ts";
 
-const router = new Router({ prefix: "/api/v1/wishlist" });
+const router = new Router({ prefix: "/api/v1/wishlists" });
 const kv = await Deno.openKv();
 const wishlistDao = new WishlistDao(kv);
 
 router.get("/:userId", async (ctx) => {
   if (!ctx.params.userId) {
-    return {
-      status: 404,
-      body: "User id is missing",
-    };
+    ctx.response.status = 404;
+    ctx.response.body = "User Id is missing";
   }
   const result = await wishlistDao.getAllWishLists(ctx.params.userId);
   ctx.response.body = result;
