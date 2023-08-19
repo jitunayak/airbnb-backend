@@ -35,6 +35,10 @@ export async function getAllWishLists(userId: string): Promise<any> {
   const allWishListItems = await kv.get([userId, "allWishListItems"]);
   console.log(allWishListItems);
 
+  if (!allWishListItems.value) {
+    return [];
+  }
+
   return allWishListItems.value;
 }
 
