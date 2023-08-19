@@ -21,10 +21,14 @@ router.post("/:userId", async (ctx) => {
   await addToWishList(ctx.params.userId, JSON.parse(body));
   ctx.response.body = body;
 });
+router.delete("/:userId/all", async (ctx) => {
+    
+})
 
 router.delete("/:userId", async (ctx) => {
   const body = await ctx.request.body().value;
   await removeFromWishList(ctx.params.userId, JSON.parse(body)?.id);
   ctx.response.body = body;
 });
+
 export { router as default };

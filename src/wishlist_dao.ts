@@ -77,3 +77,8 @@ export async function removeFromWishList(userId: string, itemId: string) {
     "allWishListItems",
   ], updatedList);
 }
+
+export async function deleteAllWishListItems(userId: string) {
+  await kv.delete([userId, "allWishListItems"]);
+  return "removed all wishlists";
+}
