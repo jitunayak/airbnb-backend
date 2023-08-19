@@ -30,7 +30,7 @@ router.delete("/:userId/all", async (ctx) => {
 
 router.delete("/:userId", async (ctx) => {
   const body = await ctx.request.body().value;
-  await removeFromWishList(ctx.params.userId, JSON.parse(body)?.id);
+  await removeFromWishList(ctx.params.userId, body?.id);
   ctx.response.body = body;
 });
 
