@@ -16,16 +16,6 @@ router.get("/:userId", async (ctx) => {
   ctx.response.body = result;
 });
 
-// router.get("/:queue/latest", async (ctx) => {
-//   const result = await getLatestFromQueue(ctx.params.queue);
-//   ctx.response.body = result;
-// });
-
-// router.get("/:queue/:id", async (ctx) => {
-//   const result = await getQueueItemAt(ctx.params.queue, ctx.params.id);
-//   ctx.response.body = result;
-// });
-
 router.post("/:userId", async (ctx) => {
   const body = await ctx.request.body().value;
   await addToWishList(ctx.params.userId, body);
