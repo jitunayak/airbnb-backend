@@ -50,3 +50,19 @@ export async function addToWishList(userId: string, data: any) {
     data,
   ]);
 }
+
+export async function removeFromWishList(userId: string, itemId: string) {
+  const allWishListItems = await kv.get([
+    userId,
+    "allWishListItems",
+    // deno-lint-ignore no-explicit-any
+  ]) as any;
+
+  const updatedList = allWishListItems.value?.filter((item) =>
+    item.id !== itemId
+  );
+  await kv.set([
+    userId,
+    "allWishListItems",
+  ], updatedList);
+}

@@ -1,5 +1,9 @@
 import { Router } from "https://deno.land/x/oak@v12.5.0/router.ts";
-import { addToWishList, getAllWishLists } from "./wishlist_dao.ts";
+import {
+  addToWishList,
+  getAllWishLists,
+  removeFromWishList,
+} from "./wishlist_dao.ts";
 
 const router = new Router({ prefix: "/api/v1/wishlists" });
 
@@ -28,4 +32,9 @@ router.post("/:userId", async (ctx) => {
   ctx.response.body = body;
 });
 
+router.delete("/:userId", async (ctx) => {
+  const body = await ctx.request.body().value;
+  await removeFromWishList(ctx.params.userId, body?.id);
+  ctx.response.body = body;
+});
 export { router as default };
