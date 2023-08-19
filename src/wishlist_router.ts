@@ -18,13 +18,13 @@ router.get("/:userId", async (ctx) => {
 
 router.post("/:userId", async (ctx) => {
   const body = await ctx.request.body().value;
-  await addToWishList(ctx.params.userId, body);
+  await addToWishList(ctx.params.userId, JSON.parse(body));
   ctx.response.body = body;
 });
 
 router.delete("/:userId", async (ctx) => {
   const body = await ctx.request.body().value;
-  await removeFromWishList(ctx.params.userId, body?.id);
+  await removeFromWishList(ctx.params.userId, JSON.parse(body)?.id);
   ctx.response.body = body;
 });
 export { router as default };
